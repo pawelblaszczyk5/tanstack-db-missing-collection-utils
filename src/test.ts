@@ -3,6 +3,7 @@ import { powerSyncCollectionOptions } from "@tanstack/powersync-db-collection";
 import {
   localStorageCollectionOptions,
   createCollection,
+  localOnlyCollectionOptions,
 } from "@tanstack/react-db";
 import { Schema } from "effect";
 import {
@@ -29,6 +30,15 @@ const localStorageCollection = createCollection(
 );
 
 const localStorageUtils = localStorageCollection.utils;
+
+const localOnlyCollection = createCollection(
+  localOnlyCollectionOptions({
+    schema,
+    getKey: (item) => item.id,
+  }),
+);
+
+const localOnlyUtils = localOnlyCollection.utils;
 
 const electricCollection = createCollection(
   electricCollectionOptions({
