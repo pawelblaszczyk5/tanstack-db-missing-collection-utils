@@ -40,17 +40,19 @@ const localOnlyCollection = createCollection(
 
 const localOnlyUtils = localOnlyCollection.utils;
 
-const electricCollection = createCollection(
-  electricCollectionOptions({
-    shapeOptions: {
-      url: "/test",
-    },
-    schema,
-    getKey: (item) => item.id,
-  }),
-);
+const electricOptions = electricCollectionOptions({
+  shapeOptions: {
+    url: "/test",
+  },
+  schema,
+  getKey: (item) => item.id,
+});
 
-const electricUtils = electricCollection.utils;
+const electricUtils = electricOptions.utils;
+
+const collectionFromElectricOptions = createCollection(electricOptions);
+
+const electricUtilsFromCollection = collectionFromElectricOptions.utils;
 
 const APP_SCHEMA = new PowerSyncSchema({
   users: new Table({
